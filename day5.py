@@ -1,99 +1,94 @@
-# import time
+import time
 
-# start = time.time()
-# print("hello")
-# # reading input
-# f = open('input.txt', 'r')
-# lines = f.readlines()
-# lines2 = lines.copy()
-# f.close()
+start = time.time()
+print("hello")
+# reading input
+f = open('input.txt', 'r')
+lines = f.readlines()
+lines2 = lines.copy()
+f.close()
 
-# # part 1
+# part 1
 
-# # construct the stacks
+# construct the stacks
 
-# stacks = []
+stacks = []
 
-# for i in range(1, len(lines[0]), 4):
-#     stacks.append([])
+for i in range(1, len(lines[0]), 4):
+    stacks.append([])
 
-# for line in lines:
-#     if line.startswith(' 1'):
-#         break
-#     stack_no = 0
-#     for i in range(1, len(line), 4):
-#         if line[i] != ' ':
-#             stacks[stack_no].insert(0, line[i])
-#         stack_no += 1
-
-
-# # executing the instructions
-
-# lines = [i.strip() for i in lines]
-
-# for line in lines:
-#     if not line.startswith('move'):
-#         continue
-#     split = line.split(' ')
-#     count = int(split[1])
-#     source = int(split[3]) - 1
-#     dest = int(split[5]) - 1
-
-#     for i in range(count):
-#         crate = stacks[source].pop()
-#         stacks[dest].append(crate)
-
-# ans = ''
-# for stack in stacks:
-#     ans += stack[-1]
-
-# print(ans)
+for line in lines:
+    if line.startswith(' 1'):
+        break
+    stack_no = 0
+    for i in range(1, len(line), 4):
+        if line[i] != ' ':
+            stacks[stack_no].insert(0, line[i])
+        stack_no += 1
 
 
-# # part 2
+# executing the instructions
 
-# # construct the stacks
+lines = [i.strip() for i in lines]
 
-# stacks = []
+for line in lines:
+    if not line.startswith('move'):
+        continue
+    split = line.split(' ')
+    count = int(split[1])
+    source = int(split[3]) - 1
+    dest = int(split[5]) - 1
 
-# for i in range(1, len(lines2[0]), 4):
-#     stacks.append([])
+    for i in range(count):
+        crate = stacks[source].pop()
+        stacks[dest].append(crate)
 
-# for line in lines2:
-#     if line.startswith(' 1'):
-#         break
-#     stack_no = 0
-#     for i in range(1, len(line), 4):
-#         if line[i] != ' ':
-#             stacks[stack_no].insert(0, line[i])
-#         stack_no += 1
+ans = ''
+for stack in stacks:
+    ans += stack[-1]
+
+print(ans)
 
 
-# # executing the instructions
+# part 2
 
-# lines2 = [i.strip() for i in lines2]
+# construct the stacks
 
-# for line in lines2:
-#     if not line.startswith('move'):
-#         continue
-#     split = line.split(' ')
-#     count = int(split[1])
-#     source = int(split[3]) - 1
-#     dest = int(split[5]) - 1
+stacks = []
 
-#     crates = stacks[source][len(stacks[source])-count:]
-#     stacks[dest] += crates
-#     del stacks[source][-count:]
+for i in range(1, len(lines2[0]), 4):
+    stacks.append([])
 
-# ans = ''
-# for stack in stacks:
-#     ans += stack[-1]
+for line in lines2:
+    if line.startswith(' 1'):
+        break
+    stack_no = 0
+    for i in range(1, len(line), 4):
+        if line[i] != ' ':
+            stacks[stack_no].insert(0, line[i])
+        stack_no += 1
 
-# print(ans)
-# end = time.time()
-# print(end - start)
 
-text_file = 'startingpoint.txt'
-skra = open(text_file, 'r').readlines()
-result = [item.split(',') for item in skra]
-length = len(result)
+# executing the instructions
+
+lines2 = [i.strip() for i in lines2]
+
+for line in lines2:
+    if not line.startswith('move'):
+        continue
+    split = line.split(' ')
+    count = int(split[1])
+    source = int(split[3]) - 1
+    dest = int(split[5]) - 1
+
+    crates = stacks[source][len(stacks[source])-count:]
+    stacks[dest] += crates
+    del stacks[source][-count:]
+
+ans = ''
+for stack in stacks:
+    ans += stack[-1]
+
+print(ans)
+end = time.time()
+print(end - start)
